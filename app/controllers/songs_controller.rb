@@ -4,17 +4,42 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all
+    
+    
+
+    if params[:genre_id].present?
+    
+      if params[:sort_alpha].present?
+        @songs      = Song.where(genre_id: params[:genre_id]).sort_by { |s| s.name }
+      else 
+        @songs    = Song.where(genre_id: params[:genre_id])
+
+      end
+
+    else
+      if params[:sort_alpha].present?
+        @songs    = Song.all.sort_by { |s| s.name }
+      else
+        @songs    = Song.all
+        
+      end
+    end
+    
+
+
+
   end
 
   # GET /songs/1
   # GET /songs/1.json
   def show
+
   end
 
   # GET /songs/new
   def new
-    @song = Song.new
+    @song     = Song.new
+
   end
 
   # GET /songs/1/edit
