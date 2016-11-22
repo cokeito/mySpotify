@@ -34,6 +34,7 @@
       <th>Name</th>
       <th>Duration</th>
       <th>Genre</th>
+      <th>Playlist</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -44,6 +45,14 @@
         <td><%= song.name %></td>
         <td><%= song.duration %></td>
         <td><%= song.genre %></td>
+        <td>
+          <%= form_for [song, Playlist.new] do |f| %>
+          
+          <%= f.submit "Agregar al Playlist", class: 'btn btn-success btn-sm' %>
+          <% end %>
+
+          
+        </td>
         <td><%= link_to 'Show', song %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
