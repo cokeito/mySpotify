@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
   # GET /songs
@@ -21,7 +23,7 @@ class SongsController < ApplicationController
         @songs    = Song.all.sort_by { |s| s.name }
       else
         @songs    = Song.all
-        
+
       end
     end
     

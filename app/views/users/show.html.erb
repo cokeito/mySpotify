@@ -6,15 +6,21 @@
       <th>Name</th>
       <th>Duration</th>
       <th>Genre</th>
+      <th> - </th>
     </tr>
   </thead>
 
   <tbody>
-    <% @user.songs.each do |s| %>
+    <% @user.playlists.each do |p| %>
       <tr>
-        <td><%= s.name %></td>
-        <td><%= s.duration %></td>
-        <td><%= s.genre %></td>
+        <td><%= p.song.name %></td>
+        <td><%= p.song.duration %></td>
+        <td><%= p.song.genre %></td>
+        <% if can? :destroy, p %>
+			<td>
+				<%= link_to "Borrar Canción", user_playlist_path(@user, p), method: :delete %>
+			</td>
+		<% end -%>
       </tr>
     <% end %>
   </tbody>

@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :show,] do 
-  	resources :songs, only: [:destroy]
-  end
-
-
-  get 'playlists/create'
-
+  
   devise_for :users, controllers: { registrations: "users/registrations" }
+  
   resources :songs do 
   	resources :playlists, only: [:create]
+  end
+  
+  resources :users, only: [:index, :show] do
+  	resources :playlists, only: [:destroy]
   end
 
   resources :genres
